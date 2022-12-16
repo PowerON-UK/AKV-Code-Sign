@@ -1,9 +1,9 @@
 {
     "manifestVersion": 1,
     "id": "akvcodesign",
-    "name": "Azure key Vault Code Sign",
-    "version": "0.1.0",
-    "publisher": "PowerON Platforms",
+    "name": "Azure Key Vault Code Sign",
+    "version": "0.0.1",
+    "publisher": "PowerONPlatforms",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
@@ -16,9 +16,21 @@
     "icons": {
         "default": "images/PONLogoWhite256px.ico"        
     },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/PowerON-UK/AKV-Code-Sign"
+    },
+    "content": {
+        "details": {
+            "path": "README.md"
+        },
+        "license": {
+            "path": "LICENSE"
+        }
+    },
     "files": [
         {
-            "path": "buildandreleasetask"
+            "path": "task"
         }
     ],
     "contributions": [
@@ -29,7 +41,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "buildandreleasetask"
+                "name": "task"
             }
         }
     ]
