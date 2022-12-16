@@ -1,0 +1,44 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "02dbaba0-04f3-4c6e-a780-d0c4d36a7f8c",
+    "name": "AVD-Code-Sign",
+    "friendlyName": "AVD Code Sign",
+    "description": "Azure Key Vault Code Signing DevOps Pipeline Extension",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "PowerON Platforms",
+    "version": {
+        "Major": 0,
+        "Minor": 0,
+        "Patch": 1
+    },
+    "instanceNameFormat": "Sign $(samplestring)",
+    "inputs": [
+        {
+            "name": "samplestring",
+            "type": "string",
+            "label": "Sample String",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "A sample string"
+        }
+    ],
+    "prejobexecution": {
+        "Node10": {
+            "target": "taskSetup.js"
+        }
+    },
+    "execution": {
+        "Node10": {
+            "target": "taskRun.js"
+        }
+    },
+    "postjobexecution": {
+        "Node10": {
+            "target": "taskClosedown.js"
+        }
+    },
+    "messages": {
+        "FirstMessage": "Im a message: %s"
+      }
+}
