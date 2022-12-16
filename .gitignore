@@ -348,3 +348,10 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+#Compiled from Typescript
+buildandreleasetask/*.js 
+buildandreleasetask/tests/*.js
+
+# Custom Exclusions
+PowerON Platforms.akvcodesign-0.1.0.vsix

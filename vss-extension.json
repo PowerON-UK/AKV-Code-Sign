@@ -1,0 +1,36 @@
+{
+    "manifestVersion": 1,
+    "id": "akvcodesign",
+    "name": "Azure key Vault Code Sign",
+    "version": "0.1.0",
+    "publisher": "PowerON Platforms",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],    
+    "description": "Azure Key Vault Code Signing DevOps Pipeline Task",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "icons": {
+        "default": "images/PONLogoWhite256px.ico"        
+    },
+    "files": [
+        {
+            "path": "buildandreleasetask"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "akvcodesign",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "buildandreleasetask"
+            }
+        }
+    ]
+}
