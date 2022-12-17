@@ -9,18 +9,130 @@
     "author": "PowerON Platforms",
     "version": {
         "Major": 0,
-        "Minor": 0,
-        "Patch": 2
+        "Minor": 1,
+        "Patch": 6
     },
-    "instanceNameFormat": "Sign $(samplestring)",
+    "instanceNameFormat": "Sign $(FilePath)",
     "inputs": [
         {
-            "name": "samplestring",
-            "type": "string",
-            "label": "Sample String",
+            "name": "AzureConnection",
+            "aliases": [
+                "azureSubscription"
+            ],
+            "type": "connectedService:AzureRM",
+            "label": "Azure Subscription",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "A sample string"
+            "helpMarkDown": "Azure Resource Manager subscription to access the Key Vault",
+            "properties": {
+                "EndpointFilterRule": "ScopeLevel != AzureMLWorkspace"
+            }
+        },
+        {
+            "name": "KeyVaultURL",
+            "type": "string",
+            "label": "Key Vault URL",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "A fully qualified URL of the key vault with the certificate that will be used for signing. An example value might be https://my-vault.vault.azure.net."
+        },
+        {
+            "name": "CertificateName",
+            "type": "string",
+            "label": "Certificate Name",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Name of the Certificate in the Azure Key Vault"
+        },
+        {
+            "name": "timestampURL",
+            "type": "pickList",
+            "label": "Timestamp URL",
+            "required": true,
+            "defaultValue": "http://timestamp.digicert.com",
+            "options": {
+                "http://timestamp.digicert.com": "http://timestamp.digicert.com",
+                "http://aatl-timestamp.globalsign.com/tsa/aohfewat2389535fnasgnlg5m23": "http://aatl-timestamp.globalsign.com/tsa/aohfewat2389535fnasgnlg5m23",
+                "http://timestamp.entrust.net/TSS/RFC3161sha2TS": "http://timestamp.entrust.net/TSS/RFC3161sha2TS",
+                "http://kstamp.keynectis.com/KSign/": "http://kstamp.keynectis.com/KSign/",
+                "http://tsa.quovadisglobal.com/TSS/HttpTspServer": "http://tsa.quovadisglobal.com/TSS/HttpTspServer",
+                "http://tss.accv.es:8318/tsa": "http://tss.accv.es:8318/tsa",
+                "http://time.certum.pl": "http://time.certum.pl", 
+                "http://psis.catcert.cat/psis/catcert/tsp": "http://psis.catcert.cat/psis/catcert/tsp", 
+                "http://sha256timestamp.ws.symantec.com/sha256/timestamp": "http://sha256timestamp.ws.symantec.com/sha256/timestamp",
+                "http://rfc3161timestamp.globalsign.com/advanced": "http://rfc3161timestamp.globalsign.com/advanced",
+                "http://timestamp.globalsign.com/tsa/r6advanced1": "http://timestamp.globalsign.com/tsa/r6advanced1",
+                "http://timestamp.apple.com/ts01": "http://timestamp.apple.com/ts01"
+            },
+            "helpMarkDown": "Select the value of the timestamp server to ensure that code continues to be trusted after the certificate expires."
+        },
+        {
+            "name": "TimeStampHashLevel",
+            "type": "pickList",
+            "label": "Timestamp Hash",
+            "required": true,
+            "defaultValue": "sha256",
+            "options": {
+                "sha1": "SHA1",
+                "sha256": "SHA256",
+                "sha384": "SHA384",
+                "sha512": "SHA512"
+            },
+            "helpMarkDown": "The name of the digest algorithm used for timestamping."
+        },
+        {
+            "name": "FileHashLevel",
+            "type": "pickList",
+            "label": "File Hash",
+            "required": true,
+            "defaultValue": "sha256",
+            "options": {
+                "sha1": "SHA1",
+                "sha256": "SHA256",
+                "sha384": "SHA384",
+                "sha512": "SHA512"
+            },
+            "helpMarkDown": "The name of the digest algorithm used for hashing the file being signed."
+        },
+        {
+            "name": "FilePath",
+            "type": "filePath",
+            "label": "File Path",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Path of the file(s) to sign. Should be fully qualified path or relative to the default working directory."
+        },
+        {
+            "name": "ContinueOnError",
+            "type": "boolean",
+            "label": "Continue on Error",
+            "required": false,
+            "defaultValue": "false",
+            "helpMarkDown": "If this is true, this task will fail if any errors are written to the error pipeline, or if any data is written to the Standard Error stream."
+        },
+        {
+            "name": "SkipSigned",
+            "type": "boolean",
+            "label": "Skip Previously Signed Files",
+            "required": false,
+            "defaultValue": "false",
+            "helpMarkDown": "If this is true, if a file is already signed it will be skipped, rather than replacing the existing signature."
+        },
+        {
+            "name": "Description",
+            "type": "string",
+            "label": "Description",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "A description of the signed content. This parameter serves the same purpose as the /d option in the Windows SDK signtool. If this parameter is not supplied, the signature will not contain a description."
+        },
+        {
+            "name": "DescriptionURL",
+            "type": "string",
+            "label": "Description URL",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "A URL with more information of the signed content. This parameter serves the same purpose as the /du option in the Windows SDK signtool. If this parameter is not supplied, the signature will not contain a URL description."
         }
     ],
     "prejobexecution": {
