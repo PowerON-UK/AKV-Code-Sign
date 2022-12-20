@@ -105,7 +105,7 @@ async function signFiles(
         .arg(FileList)
         .arg('--verbose')
         .argIf(!isEmptyString(Description),'--description ' + Description)
-        .argIf(!isEmptyString(DescriptionURL),'--description ' + DescriptionURL)
+        .argIf(!isEmptyString(DescriptionURL),'--description-url ' + DescriptionURL)
         .argIf(ContinueOnError,'--continue-on-error')
         .argIf(SkipSigned,'--skip-signed');
 
