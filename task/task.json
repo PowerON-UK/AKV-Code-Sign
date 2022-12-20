@@ -9,8 +9,8 @@
     "author": "PowerON Platforms",
     "version": {
         "Major": 0,
-        "Minor": 1,
-        "Patch": 6
+        "Minor": 2,
+        "Patch": 0
     },
     "instanceNameFormat": "Sign $(FilePath)",
     "inputs": [
@@ -144,13 +144,5 @@
         "Node10": {
             "target": "taskRun.js"
         }
-    },
-    "postjobexecution": {
-        "Node10": {
-            "target": "taskClosedown.js"
-        }
-    },
-    "messages": {
-        "FirstMessage": "Im a message: %s"
-      }
+    }
 }
