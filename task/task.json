@@ -1,21 +1,21 @@
 {
     "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
     "id": "02dbaba0-04f3-4c6e-a780-d0c4d36a7f8c",
-    "name": "AVD-Code-Sign",
-    "friendlyName": "AVD Code Sign",
+    "name": "AKV-Code-Sign",
+    "friendlyName": "Azure Key Vault Code Sign",
     "description": "Azure Key Vault Code Signing DevOps Pipeline Extension",
     "helpMarkDown": "",
-    "category": "Utility",
+    "category": "Azure Pipelines",
     "author": "PowerON Platforms",
     "version": {
         "Major": 0,
         "Minor": 2,
-        "Patch": 0
+        "Patch": 4
     },
     "instanceNameFormat": "Sign $(FilePath)",
     "inputs": [
         {
-            "name": "AzureConnection",
+            "name": "azureConnection",
             "aliases": [
                 "azureSubscription"
             ],
@@ -29,7 +29,7 @@
             }
         },
         {
-            "name": "KeyVaultURL",
+            "name": "keyVaultURL",
             "type": "string",
             "label": "Key Vault URL",
             "defaultValue": "",
@@ -37,7 +37,7 @@
             "helpMarkDown": "A fully qualified URL of the key vault with the certificate that will be used for signing. An example value might be https://my-vault.vault.azure.net."
         },
         {
-            "name": "CertificateName",
+            "name": "certificateName",
             "type": "string",
             "label": "Certificate Name",
             "defaultValue": "",
@@ -67,7 +67,7 @@
             "helpMarkDown": "Select the value of the timestamp server to ensure that code continues to be trusted after the certificate expires."
         },
         {
-            "name": "TimeStampHashLevel",
+            "name": "timeStampHashLevel",
             "type": "pickList",
             "label": "Timestamp Hash",
             "required": true,
@@ -81,7 +81,7 @@
             "helpMarkDown": "The name of the digest algorithm used for timestamping."
         },
         {
-            "name": "FileHashLevel",
+            "name": "fileHashLevel",
             "type": "pickList",
             "label": "File Hash",
             "required": true,
@@ -95,7 +95,7 @@
             "helpMarkDown": "The name of the digest algorithm used for hashing the file being signed."
         },
         {
-            "name": "FilePath",
+            "name": "filePath",
             "type": "filePath",
             "label": "File Path",
             "defaultValue": "",
@@ -103,7 +103,7 @@
             "helpMarkDown": "Path of the file(s) to sign. Should be fully qualified path or relative to the default working directory."
         },
         {
-            "name": "ContinueOnError",
+            "name": "continueOnError",
             "type": "boolean",
             "label": "Continue on Error",
             "required": false,
@@ -111,7 +111,7 @@
             "helpMarkDown": "If this is true, this task will fail if any errors are written to the error pipeline, or if any data is written to the Standard Error stream."
         },
         {
-            "name": "SkipSigned",
+            "name": "skipSigned",
             "type": "boolean",
             "label": "Skip Previously Signed Files",
             "required": false,
@@ -119,7 +119,7 @@
             "helpMarkDown": "If this is true, if a file is already signed it will be skipped, rather than replacing the existing signature."
         },
         {
-            "name": "Description",
+            "name": "description",
             "type": "string",
             "label": "Description",
             "defaultValue": "",
@@ -127,7 +127,7 @@
             "helpMarkDown": "A description of the signed content. This parameter serves the same purpose as the /d option in the Windows SDK signtool. If this parameter is not supplied, the signature will not contain a description."
         },
         {
-            "name": "DescriptionURL",
+            "name": "descriptionURL",
             "type": "string",
             "label": "Description URL",
             "defaultValue": "",

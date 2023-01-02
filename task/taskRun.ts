@@ -3,36 +3,41 @@ import tr = require('azure-pipelines-task-lib/toolrunner');
 
 async function run() {
     try {
-        const azureConnectionName = tl.getInputRequired('AzureConnection');
+        const azureConnectionName = tl.getInputRequired('azureConnection');
 
         const AuthClientID = tl.getEndpointAuthorizationParameterRequired(azureConnectionName, 'serviceprincipalid')
         const AuthTenantID = tl.getEndpointAuthorizationParameterRequired(azureConnectionName, 'tenantid')
         const AuthClientSecret = tl.getEndpointAuthorizationParameterRequired(azureConnectionName, 'serviceprincipalkey')
 
-        const KeyVaultURL = tl.getInputRequired('KeyVaultURL');
-        const CertificateName = tl.getInputRequired('CertificateName');
-        const TimeStampURL = tl.getInputRequired('TimeStampURL');
-        const TimeStampHashLevel = tl.getInputRequired('TimeStampHashLevel');
-        const FileHashLevel = tl.getInputRequired('FileHashLevel');
+        const KeyVaultURL = tl.getInputRequired('keyVaultURL');
+        const CertificateName = tl.getInputRequired('certificateName');
+        const TimeStampURL = tl.getInputRequired('timeStampURL');
+        const TimeStampHashLevel = tl.getInputRequired('timeStampHashLevel');
+        const FileHashLevel = tl.getInputRequired('fileHashLevel');
 
-        const FilePath = tl.getPathInputRequired('FilePath');
+        const FilePath = tl.getPathInputRequired('filePath');
 
-        const ContinueOnError = tl.getBoolInput('ContinueOnError');
-        const SkipSigned = tl.getBoolInput('SkipSigned');
+        const ContinueOnError = tl.getBoolInput('continueOnError');
+        const SkipSigned = tl.getBoolInput('skipSigned');
 
-        var Description = tl.getInput('Description', false)
+        var Description = tl.getInput('description', false)
         if (Description === undefined)
         {
             Description = "" //If not already set create as empty string
         }
 
-        var DescriptionURL = tl.getInput('DescriptionURL', false)
+        var DescriptionURL = tl.getInput('descriptionURL', false)
         if (DescriptionURL === undefined)
         {
             DescriptionURL = "" //If not already set create as empty string
         }
 
-        var fileList = tl.find(FilePath);
+        var fileList = tl.findMatch("" ,FilePath); //Use default seach location
+
+        if (fileList.length < 1)
+        {
+            tl.setResult(tl.TaskResult.SucceededWithIssues, "Unable to locate any files to sign");
+        }
 
         signFiles(
             KeyVaultURL,
