@@ -9,6 +9,7 @@
             "id": "Microsoft.VisualStudio.Services"
         }
     ],    
+    "public": true,
     "description": "Azure Key Vault Code Signing DevOps Pipeline Task",
     "categories": [
         "Azure Pipelines"
