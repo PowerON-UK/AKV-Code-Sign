@@ -8,9 +8,9 @@
     "category": "Azure Pipelines",
     "author": "PowerON Platforms",
     "version": {
-        "Major": 0,
-        "Minor": 2,
-        "Patch": 4
+        "Major": 1,
+        "Minor": 0,
+        "Patch": 0
     },
     "instanceNameFormat": "Sign $(FilePath)",
     "inputs": [

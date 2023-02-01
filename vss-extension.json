@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "akvcodesign",
     "name": "Azure Key Vault Code Sign",
-    "version": "0.2.4",
+    "version": "1.0.0",
     "publisher": "PowerONPlatforms",
     "targets": [
         {
