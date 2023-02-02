@@ -1,9 +1,11 @@
 # AKV-Code-Sign
+
 Azure Key Vault Code Signing DevOps Pipeline Extension
 
 ## Typical Usage
+
 ```yaml
-- task: PowerONPlatforms.akvcodesign.akvcodesign.AKV-Code-Sign@0
+- task: PowerONPlatforms.akvcodesign.akvcodesign.AKV-Code-Sign@1
   displayName: 'Sign MyApp.exe'
   inputs:
     azureSubscription: 'MySubscription (817C7175-BD04-4ACD-9426-AD7FFB3D846A)'
@@ -11,7 +13,9 @@ Azure Key Vault Code Signing DevOps Pipeline Extension
     certificateName: 'CodeSigning2022'
     filePath: 'MyProject\bin\$(configuration)\MyApp.exe'
 ```
+
 ## Permissions
+
 To enable the service connector to access the Certificate, ensure that the Key Vault has an Access Control Policy enabling the service connector with the following rights:
 | Area    | Permissions |
 | -------- | ------- |
@@ -19,13 +23,13 @@ To enable the service connector to access the Certificate, ensure that the Key V
 | Secret | Get, List     |
 | Certificate    | Get, List    |
 
-The Key Vault must be accessable to the build agent server. In the case of Azure DevOps hosted agents this requires the Azure Key Vault to allow public access from all networks.
+The Key Vault must be accessible to the build agent server. In the case of Azure DevOps hosted agents this requires the Azure Key Vault to allow public access from all networks.
 
 ## Syntax
 
 ```yaml
 steps:
-- task: PowerONPlatforms.akvcodesign.akvcodesign.AKV-Code-Sign@0
+- task: PowerONPlatforms.akvcodesign.akvcodesign.AKV-Code-Sign@1
   inputs:
     azureSubscription: # string. Required. Azure Resource Manager connection.
     keyVaultURL: # string. Required. URL to the Azure Key Vault hosting the Certificate.
@@ -44,7 +48,7 @@ steps:
 
 ```yaml
 steps:
-- task: PowerONPlatforms.akvcodesign.akvcodesign.AKV-Code-Sign@0
+- task: PowerONPlatforms.akvcodesign.akvcodesign.AKV-Code-Sign@1
   displayName: 'Sign '
   inputs:
     azureSubscription: 'MySubscription (817C7175-BD04-4ACD-9426-AD7FFB3D846A)'
@@ -61,11 +65,13 @@ steps:
 ```
 
 ## Shoutout
+
 A massive shoutout to [Kevin Jones](https://github.com/vcsjones) for writing the [AzureSignTool](https://github.com/vcsjones/AzureSignTool), without this tool this extension would not be possible 
 
 # Development
 
 ## Required Setup
+
 - Visual Studio Code (Not a hard requirement but all development on this extension at PowerON is done with VS Code)
 - Latest version of Node (VS Pipeline only runs in Node 10 however Mocha needs at least Node 14 to operate)
 - Latest version of Typescript `npm install -g typescript`
@@ -73,6 +79,7 @@ A massive shoutout to [Kevin Jones](https://github.com/vcsjones) for writing the
 - Run npm install from the project directory
 
 ## Building the Extension
+
 - update `task/task.json` version number
 - update `vss-extension.json` version number 
 - run `npm install task\` on the project directory
@@ -80,10 +87,12 @@ A massive shoutout to [Kevin Jones](https://github.com/vcsjones) for writing the
 - run `tfx extension create --manifest-globs vss-extension.json` to compile the extension
 
 ### Azure Devops API Reference 
+
 - Typescript API https://github.com/microsoft/azure-pipelines-task-lib/blob/master/node/docs/azure-pipelines-task-lib.md
 - vss-extension.json https://learn.microsoft.com/en-us/azure/devops/extend/develop/manifest?view=azure-devops
 - task.json https://github.com/Microsoft/azure-pipelines-task-lib/blob/master/tasks.schema.json
 
 ## Extension Behavior
+
 - taskSetup - Install the tool AzureSignTool to the local machine using the dotnet CLI (https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install)
 - taskRun - Takes pipeline input and converts into a commandline to run the AzureSignTool against the required binaries
