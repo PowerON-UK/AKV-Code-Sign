@@ -76,7 +76,7 @@ A massive shoutout to [Kevin Jones](https://github.com/vcsjones) for writing the
 - Latest version of Node (VS Pipeline only runs in Node 10 however Mocha needs at least Node 14 to operate)
 - Latest version of Typescript `npm install -g typescript`
 - Latest version of the Azure Devops CLI Tools `npm install -g tfx-cli`
-- Run npm install from the project directory
+- Run `npm install` from the project directory
 
 ## Building the Extension
 
