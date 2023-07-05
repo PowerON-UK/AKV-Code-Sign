@@ -9,7 +9,9 @@ async function run() {
         var toolPath = tl.which('dotnet');
         var npm:tr.ToolRunner = tl.tool(toolPath).line('tool install --global azuresigntool');
         var execResult: IExecSyncResult = npm.execSync();
-        if (execResult.stderr && !execResult.stderr.startsWith("Tool 'azuresigntool' is already installed."))
+        if (execResult.stderr && 
+            !execResult.stderr.startsWith("Tool 'azuresigntool' is already installed.") && 
+            !execResult.stderr.startsWith("Das Tool \"azuresigntool\" ist bereits installiert."))
         {
             throw new Error(execResult.stderr)
         }
